@@ -1,4 +1,6 @@
-public class EmployeeUser
+package Models;
+
+public class EmployeeUser extends Record
 {
     private String employeeId;
     private String name;
@@ -26,11 +28,13 @@ public class EmployeeUser
     public String getAddress(){return address;}
     public String getPhoneNumber(){return phoneNumber;}
 
+    @Override
     public String lineRepresentation()
     {
         return (employeeId + "," + name + "," + email + "," + address + "," + phoneNumber);
     }
 
+    @Override
     public String getSearchKey()
     {
         return this.employeeId;

@@ -1,3 +1,9 @@
+import Data.CustomerProductDatabase;
+import Data.ProductDatabase;
+import Models.CustomerProduct;
+import Models.Product;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -7,7 +13,7 @@ public class EmployeeRole {
     private ProductDatabase productsDatabase;
     private CustomerProductDatabase customerProductDatabase;
 
-    public EmployeeRole() {
+    public EmployeeRole() throws IOException {
         this.productsDatabase = new ProductDatabase("products.txt");
         this.customerProductDatabase = new CustomerProductDatabase("CustomerProducts.txt");
         productsDatabase.readFromFile();
@@ -15,13 +21,13 @@ public class EmployeeRole {
     }
 
 
-    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) throws IOException {
         Product newProduct = new Product(productID, productName, manufacturerName, supplierName, quantity, price);
         productsDatabase.insertRecord(newProduct);
         productsDatabase.saveToFile();
     }
 
-    public Product[] getListOfProducts() {  
+    public Product[] getListOfProducts() {
         ArrayList<Product> list = productsDatabase.returnAllRecords();
     return list.toArray(new Product[0]);
     }
@@ -31,7 +37,7 @@ public class EmployeeRole {
         return list.toArray(new CustomerProduct[0]);
     }
 
-    public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
+    public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) throws IOException {
         Product product = productsDatabase.getRecord(productID);
         if (product == null) {
             System.out.println("product not found.");
@@ -53,7 +59,7 @@ public class EmployeeRole {
         return true;
     }
 
-    public double returnProduct(String customerSSN, String productID, LocalDate purchaseDate, LocalDate returnDate) {
+    public double returnProduct(String customerSSN, String productID, LocalDate purchaseDate, LocalDate returnDate) throws IOException {
         if (returnDate.isBefore(purchaseDate)) {
             return -1;
         }
@@ -78,7 +84,7 @@ public class EmployeeRole {
         return product.getPrice();
     }
 
-    public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
+    public boolean applyPayment(String customerSSN, LocalDate purchaseDate) throws IOException {
         ArrayList<CustomerProduct> allPurchases = customerProductDatabase.returnAllRecords();
 
 
@@ -101,7 +107,7 @@ public class EmployeeRole {
         return false;
     }
 
-    public void logout() {
+    public void logout() throws IOException {
         productsDatabase.saveToFile();
         customerProductDatabase.saveToFile();
         System.out.println("all data has been saved successfully. Logging out....");

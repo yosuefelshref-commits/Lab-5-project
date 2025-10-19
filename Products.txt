@@ -2,3 +2,4 @@ P001,Laptop Dell XPS,Dell,TechStore,5,35000.0
 P002,Smartphone Samsung S23,Samsung,MobileShop,10,22000.0
 P003,Headphones Sony WH-1000XM5,Sony,SoundWorld,8,12000.0
 P004,Wireless Mouse Logitech M330,Logitech,ComputerLand,15,650.0
+555,pepsi,pepsii,pepsi,50,17.0

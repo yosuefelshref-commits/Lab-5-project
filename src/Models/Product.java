@@ -1,4 +1,6 @@
-public class Product {
+package Models;
+
+public class Product extends Record {
 
     private String productID;
     private String productName;
@@ -25,11 +27,13 @@ public class Product {
         this.quantity = quantity;
     }
 
+    @Override
     public String lineRepresentation() {
         return productID + "," + productName + "," + manufacturerName + "," + supplierName + "," + quantity + ","
                 + price;
     }
 
+    @Override
     public String getSearchKey() {
         return productID;
     }

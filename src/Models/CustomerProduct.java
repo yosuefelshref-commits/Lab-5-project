@@ -1,7 +1,9 @@
+package Models;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class CustomerProduct {
+public class CustomerProduct extends Record {
     private String customerSSN;
     private String productID;
     private LocalDate purchaseDate;
@@ -11,6 +13,7 @@ public class CustomerProduct {
         this.customerSSN = customerSSN;
         this.productID = productID;
         this.purchaseDate = purchaseDate;
+        this.paid = false;
     }
 
     public String getCustomerSSN() {
@@ -33,11 +36,13 @@ public class CustomerProduct {
         this.paid = paid;
     }
 
+    @Override
     public String lineRepresentation() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid;
     }
 
+    @Override
     public String getSearchKey() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
