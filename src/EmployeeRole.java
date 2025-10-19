@@ -8,9 +8,12 @@ public class EmployeeRole {
     private CustomerProductDatabase customerProductDatabase;
 
     public EmployeeRole() {
-        this.productsDatabase =  new ProductDatabase("products.txt");
-        this.customerProductDatabase = new CustomerProductDatabase("customerProducts.txt");
+        this.productsDatabase = new ProductDatabase("products.txt");
+        this.customerProductDatabase = new CustomerProductDatabase("CustomerProducts.txt");
+        productsDatabase.readFromFile();
+        customerProductDatabase.readFromFile();
     }
+
 
     public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
         Product newProduct = new Product(productID, productName, manufacturerName, supplierName, quantity, price);
